@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <style>
+        .button{
+
+        }
+    </style>
+</head>
+<body>
+<h1 style="color: orange; text-align: center">Ứng dụng quản lý sản phẩm</h1>
+<input id="newSanpham" type="text">
+<button class="btn btn-secondary" onclick="creatSanPham()">Thêm sản phẩm</button>
+<span id="validate"></span>
+<table class="table" border="1" style="width: 100%; text-align: center">
+    <th>STT</th>
+    <th>Tên Sản Phẩm</th>
+    <th>Sủa</th>
+    <th>Xóa</th>
+    <tbody  id="drawTable">
+
+    </tbody>
+
+</table>
+<script>
+    let listSanPham = ['Gạo', 'Ngô', 'Khoai', 'Sắn'];
+
+    function showListSanPham() {
+        let drawTable = '';
+        for (let i = 0; i < listSanPham.length; i++) {
+            let j = i + 1;
+            drawTable += `<tr>
+                           <td>${j}</td>
+                           <td>${listSanPham[i]}</td>
+                           <td><button class="btn btn-primary" onclick="upDateSanPham()">Edit</button></td>
+                           <td><button class="btn btn-danger" onclick="deleteSanPham()">Delete</button></td>
+                           </tr>`
+
+        }
+        document.getElementById('drawTable').innerHTML=drawTable
+    }
+    showListSanPham();
+    function creatSanPham() {
+        let newSamPham=document.getElementById('newSanpham').value;
+        if (newSamPham.trim()===''){
+            document.getElementById('validate').innerHTML='<span style="color: red">Sai tên sản phẩm. Vui lòng nhập lại</span>'
+        } else {
+            listSanPham.push(newSamPham);
+            document.getElementById('validate').innerHTML='<span style="color: green">Thêm thành công</span>'
+            showListSanPham()
+        }
+    }
+    function upDateSanPham(id) {
+        console.log('id ===========', id)
+        let editSanPham = prompt('Enter the name to update Student', listSanPham[id])
+        if(editSanPham.trim()===''){
+            document.getElementById('validate').innerHTML = '<span style="color: red">Vui lòng nhập lại Sản phẩm !!</span>'
+        } else {
+            listStudents[id] = editSanPham;
+            document.getElementById('validate').innerHTML = '<span style="color: blueviolet">Thành công!!</span>'
+            showListSanPham();
+        }
+    }
+    function deleteSanPham(id) {
+        listSanPham.splice(id,1)
+        showListSanPham()
+    }
+
+</script>
+
+</body>
+</html>
